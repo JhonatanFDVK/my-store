@@ -1,5 +1,6 @@
 ﻿using mystore.Entities.Enums;
 using System.Text;
+using System.Globalization;
 
 namespace mystore.Entities
 {
@@ -53,21 +54,25 @@ namespace mystore.Entities
             sb.Append(Status);
             sb.AppendLine();
             sb.Append("Client: ");
-            sb.Append(Client.Name);
+            sb.Append(Client.Name + " ");
             sb.Append(Client.BithDate);
             sb.Append(" - ");
             sb.Append(Client.Email);
 
-            sb.AppendLine("Order items:");
+            sb.AppendLine("\nOrder items:");
 
             foreach (OrderItem item in Items)
             {
                 sb.Append(
+                    "\n" +
                     item.Product.Name + ", " + 
                     item.Product.Price + 
                     ", Quantity: " + item.Quantity + 
-                    ", Subtotal: " + item.SubTotal());
+                    ", Subtotal: " + item.SubTotal().ToString("F2", CultureInfo.InvariantCulture));
             }
+
+            sb.AppendLine();
+            sb.Append("Total price: $" + Total().ToString("F2", CultureInfo.InvariantCulture));
 
             return sb.ToString();
 
