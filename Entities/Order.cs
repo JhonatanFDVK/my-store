@@ -46,7 +46,7 @@ namespace mystore.Entities
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("ORDER SUMMARY:");
+            sb.AppendLine("\nORDER SUMMARY:\n");
             sb.Append("Order moment: ");
             sb.Append(Moment);
             sb.AppendLine();
@@ -59,14 +59,14 @@ namespace mystore.Entities
             sb.Append(" - ");
             sb.Append(Client.Email);
 
-            sb.AppendLine("\nOrder items:");
+            sb.AppendLine();
+            sb.AppendLine("\nOrder items:\n");
 
             foreach (OrderItem item in Items)
             {
-                sb.Append(
-                    "\n" +
+                sb.AppendLine(
                     item.Product.Name + ", " + 
-                    item.Product.Price + 
+                    item.Product.Price.ToString("F2", CultureInfo.InvariantCulture) + 
                     ", Quantity: " + item.Quantity + 
                     ", Subtotal: " + item.SubTotal().ToString("F2", CultureInfo.InvariantCulture));
             }
